@@ -19,5 +19,18 @@ class PropertiesTest extends TestCase
         $response = $this->getJson(route('api.properties.index'));
         // We will only assert that the response returns a 200 status for now.
         $response->assertOk();
+
+        // Add the assertion that will prove that we receive what we need
+        // from the response.
+        $response->assertJson([
+            'data' => [
+                [
+                    'id' => $property->id,
+                    'type' => $property->type,
+                    'price' => $property->price,
+                    'description' => $property->description,
+                ]
+            ]
+        ]);
     }
 }
